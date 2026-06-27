@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /customer/dashboard/
+Disallow: /mitra/dashboard/
+
+Sitemap: https://tukangexpress.id/sitemap.xml

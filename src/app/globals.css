@@ -1,0 +1,118 @@
+/**
+ * @file globals.css
+ * Tailwind CSS + custom styles untuk Tukang Express.
+ * Tema: Hijau Muda (#22C55E) & Putih — clean, fresh, professional.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@import "tailwindcss";
+
+/* ─── Design Tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --color-brand-green:        #22C55E;
+  --color-brand-green-light:  #86EFAC;
+  --color-brand-green-dark:   #16A34A;
+  --color-brand-emerald:      #10B981;
+  --color-brand-green-pale:   #DCFCE7;
+  --color-surface-white:      #FFFFFF;
+  --color-surface-green-50:   #F0FDF4;
+  --color-text-dark:          #14532D;
+  --color-text-body:          #374151;
+  --color-text-muted:         #6B7280;
+  --color-border:             #BBF7D0;
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --navbar-height: 80px;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--color-surface-white);
+  color: var(--color-text-body);
+  overflow-x: hidden;
+}
+
+/* ─── Scroll Margin — Offset navbar untuk setiap section ─────────────────────
+   Ini memastikan saat link diklik, section tidak tertutup navbar (80px)
+   ──────────────────────────────────────────────────────────────────────────── */
+section[id] {
+  scroll-margin-top: var(--navbar-height);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #f0fdf4; }
+::-webkit-scrollbar-thumb { background: var(--color-brand-green); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-brand-green-dark); }
+
+/* ─── Selection & Focus ──────────────────────────────────────────────────────── */
+::selection { background-color: var(--color-brand-green); color: white; }
+*:focus-visible {
+  outline: 2px solid var(--color-brand-green);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Canvas — non-blocking pointer ─────────────────────────────────────────── */
+canvas { pointer-events: none !important; }
+
+/* ─── Floating animation untuk HeroRight decorative cards ───────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-6px) rotate(1deg); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.85); }
+}
+
+/* Utility classes */
+.animate-float        { animation: float 3s ease-in-out infinite; }
+.animate-float-slow   { animation: float-slow 4s ease-in-out infinite; }
+.animate-float-delay  { animation: float 3.5s ease-in-out 0.8s infinite; }
+.animate-float-delay2 { animation: float 4s ease-in-out 1.5s infinite; }
+.animate-pulse-dot    { animation: pulse-dot 1.5s ease-in-out infinite; }
+
+/* ─── Image loading placeholder ─────────────────────────────────────────────── */
+img {
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"] {
+  /* Placeholder abu-abu saat load */
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+/* ─── Gradient text helper ───────────────────────────────────────────────────── */
+.text-gradient-green {
+  background: linear-gradient(135deg, #16a34a, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Card hover lift ────────────────────────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(34, 197, 94, 0.15);
+}
+
+/* ─── Section spacing ────────────────────────────────────────────────────────── */
+.section-padding { padding: 6rem 1.5rem; }
+@media (min-width: 1024px) { .section-padding { padding: 8rem 4rem; } }
