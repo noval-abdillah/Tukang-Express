@@ -23,7 +23,16 @@
   --color-border:             #BBF7D0;
   --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
   --navbar-height: 80px;
+  --mobile-header-height: 56px;
+  --bottom-nav-height: 64px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
 }
+
+/* ─── Safe area utilities (notch / gesture bar) ─────────────────────────────── */
+.pb-safe { padding-bottom: max(0.5rem, env(safe-area-inset-bottom)); }
+.pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+.mb-safe { margin-bottom: env(safe-area-inset-bottom, 0px); }
 
 /* ─── Base ───────────────────────────────────────────────────────────────────── */
 html {
