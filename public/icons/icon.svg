@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <rect width="512" height="512" rx="96" fill="#22C55E"/>
+  <rect x="48" y="48" width="416" height="416" rx="72" fill="#16A34A" opacity="0.25"/>
+  <text x="256" y="290" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="160" font-weight="900" fill="#FFFFFF">TE</text>
+  <path d="M128 380 L384 380" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" opacity="0.6"/>
+</svg>
