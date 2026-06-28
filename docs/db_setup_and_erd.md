@@ -6,6 +6,8 @@ Dokumen ini berisi panduan setup database **Supabase PostgreSQL** dan rancangan 
 
 ## 📊 Entity Relationship Diagram (ERD)
 
+![Entity Relationship Diagram (ERD)](./erd.png)
+
 Berikut adalah relasi antar tabel pada platform Tukang Express digambarkan dalam diagram Mermaid:
 
 ```mermaid
