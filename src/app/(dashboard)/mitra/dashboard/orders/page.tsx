@@ -50,51 +50,113 @@ export default function MitraOrdersPage() {
       </div>
 
       <div className="rounded-3xl bg-white border border-slate-200 overflow-hidden shadow-sm">
-        <div className="grid grid-cols-[1fr_1fr_1fr_120px_100px_130px] px-6 py-3 bg-slate-50 text-xs font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100">
-          <span>Customer</span><span>Layanan</span><span>Waktu</span><span>Nominal</span><span>Status</span><span>Aksi</span>
+        {/* Desktop table */}
+        <div className="hidden lg:block">
+          <div className="grid grid-cols-[1fr_1fr_1fr_120px_100px_130px] px-6 py-3 bg-slate-50 text-xs font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100">
+            <span>Customer</span><span>Layanan</span><span>Waktu</span><span>Nominal</span><span>Status</span><span>Aksi</span>
+          </div>
+          {filtered.length === 0 ? (
+            <div className="p-8 text-center text-slate-400 text-sm">Tidak ada order dalam kategori ini.</div>
+          ) : (
+            filtered.map(o => (
+              <div key={o.id} className="grid grid-cols-[1fr_1fr_1fr_120px_100px_130px] px-6 py-4 border-b border-slate-50 hover:bg-slate-50 transition-colors items-center">
+                <div>
+                  <p className="font-semibold text-sm">{o.customer}</p>
+                  <p className="text-xs text-slate-400">{o.id}</p>
+                </div>
+                <p className="text-sm text-slate-600">{o.layanan}</p>
+                <p className="text-sm text-slate-500">{o.waktu}</p>
+                <p className="text-sm font-bold">{o.nominal}</p>
+                <div>
+                  <span className={`inline-block rounded-full px-3 py-1 text-xs font-bold ${badgeColor[o.status]}`}>{o.status}</span>
+                </div>
+                <div>
+                  {o.status === 'Menunggu' && (
+                    <button
+                      onClick={() => handleStatusChange(o.id, 'Dikerjakan')}
+                      className="rounded-xl bg-green-500 text-white px-3 py-1.5 text-xs font-bold hover:bg-green-600 transition-colors cursor-pointer"
+                    >
+                      Terima Order
+                    </button>
+                  )}
+                  {o.status === 'Dikerjakan' && (
+                    <button
+                      onClick={() => handleStatusChange(o.id, 'Selesai')}
+                      className="rounded-xl bg-blue-500 text-white px-3 py-1.5 text-xs font-bold hover:bg-blue-600 transition-colors cursor-pointer"
+                    >
+                      Tandai Selesai
+                    </button>
+                  )}
+                  {o.status === 'Selesai' && (
+                    <span className="text-xs text-slate-400 font-semibold">Tugas Selesai</span>
+                  )}
+                  {o.status === 'Dibatalkan' && (
+                    <span className="text-xs text-red-400 font-semibold">Dibatalkan</span>
+                  )}
+                </div>
+              </div>
+            ))
+          )}
         </div>
-        {filtered.length === 0 ? (
-          <div className="p-8 text-center text-slate-400 text-sm">Tidak ada order dalam kategori ini.</div>
-        ) : (
-          filtered.map(o => (
-            <div key={o.id} className="grid grid-cols-[1fr_1fr_1fr_120px_100px_130px] px-6 py-4 border-b border-slate-50 hover:bg-slate-50 transition-colors items-center">
-              <div>
-                <p className="font-semibold text-sm">{o.customer}</p>
-                <p className="text-xs text-slate-400">{o.id}</p>
-              </div>
-              <p className="text-sm text-slate-600">{o.layanan}</p>
-              <p className="text-sm text-slate-500">{o.waktu}</p>
-              <p className="text-sm font-bold">{o.nominal}</p>
-              <div>
-                <span className={`inline-block rounded-full px-3 py-1 text-xs font-bold ${badgeColor[o.status]}`}>{o.status}</span>
-              </div>
-              <div>
-                {o.status === 'Menunggu' && (
-                  <button
-                    onClick={() => handleStatusChange(o.id, 'Dikerjakan')}
-                    className="rounded-xl bg-green-500 text-white px-3 py-1.5 text-xs font-bold hover:bg-green-600 transition-colors cursor-pointer"
-                  >
-                    Terima Order
-                  </button>
-                )}
-                {o.status === 'Dikerjakan' && (
-                  <button
-                    onClick={() => handleStatusChange(o.id, 'Selesai')}
-                    className="rounded-xl bg-blue-500 text-white px-3 py-1.5 text-xs font-bold hover:bg-blue-600 transition-colors cursor-pointer"
-                  >
-                    Tandai Selesai
-                  </button>
-                )}
-                {o.status === 'Selesai' && (
-                  <span className="text-xs text-slate-400 font-semibold">Tugas Selesai</span>
-                )}
-                {o.status === 'Dibatalkan' && (
-                  <span className="text-xs text-red-400 font-semibold">Dibatalkan</span>
-                )}
-              </div>
+
+        {/* Mobile cards */}
+        <div className="lg:hidden">
+          {filtered.length === 0 ? (
+            <div className="p-8 text-center text-slate-400 text-sm">Tidak ada order dalam kategori ini.</div>
+          ) : (
+            <div className="p-4 space-y-3">
+              {filtered.map(o => (
+                <div key={o.id} className="rounded-2xl border border-slate-100 bg-slate-50/50 p-4 space-y-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="font-bold text-sm text-slate-900 truncate">{o.customer}</p>
+                      <p className="text-xs text-slate-400 mt-0.5">{o.id}</p>
+                    </div>
+                    <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-bold ${badgeColor[o.status]}`}>{o.status}</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-sm">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Layanan</p>
+                      <p className="text-slate-700 font-medium mt-0.5">{o.layanan}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Nominal</p>
+                      <p className="text-slate-900 font-bold mt-0.5">{o.nominal}</p>
+                    </div>
+                    <div className="col-span-2">
+                      <p className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Waktu</p>
+                      <p className="text-slate-600 mt-0.5">{o.waktu}</p>
+                    </div>
+                  </div>
+                  <div className="pt-1">
+                    {o.status === 'Menunggu' && (
+                      <button
+                        onClick={() => handleStatusChange(o.id, 'Dikerjakan')}
+                        className="w-full rounded-xl bg-green-500 text-white px-4 py-2.5 text-sm font-bold hover:bg-green-600 transition-colors cursor-pointer"
+                      >
+                        Terima Order
+                      </button>
+                    )}
+                    {o.status === 'Dikerjakan' && (
+                      <button
+                        onClick={() => handleStatusChange(o.id, 'Selesai')}
+                        className="w-full rounded-xl bg-blue-500 text-white px-4 py-2.5 text-sm font-bold hover:bg-blue-600 transition-colors cursor-pointer"
+                      >
+                        Tandai Selesai
+                      </button>
+                    )}
+                    {o.status === 'Selesai' && (
+                      <p className="text-center text-xs text-slate-400 font-semibold py-1">Tugas Selesai</p>
+                    )}
+                    {o.status === 'Dibatalkan' && (
+                      <p className="text-center text-xs text-red-400 font-semibold py-1">Dibatalkan</p>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
