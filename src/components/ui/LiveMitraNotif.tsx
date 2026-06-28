@@ -68,7 +68,7 @@ export function LiveMitraNotif() {
   return (
     <div
       className={`
-        fixed bottom-20 left-4 lg:bottom-6 z-30
+        fixed bottom-[calc(var(--bottom-nav-height)+var(--safe-bottom)+0.5rem)] left-4 lg:bottom-6 z-30
         transition-all duration-500 ease-out
         ${visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0 pointer-events-none'}
       `}

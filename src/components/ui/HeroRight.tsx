@@ -54,7 +54,7 @@ const MITRA_AVATARS = [
 
 export function HeroRight() {
   return (
-    <div className="relative flex items-center justify-center lg:justify-end h-full min-h-[560px]">
+    <div className="relative flex items-center justify-center lg:justify-end h-full min-h-[400px] lg:min-h-[560px]">
 
       {/* ── Card Utama: App Mockup ─────────────────────────────────────────── */}
       <div className="
@@ -159,7 +159,7 @@ export function HeroRight() {
       </div>
 
       {/* ── Floating Card: Mitra Ditemukan ────────────────────────────────── */}
-      <div className="absolute -left-6 top-16 bg-white rounded-2xl shadow-xl shadow-green-100 border border-green-100 px-4 py-3 flex items-center gap-3 w-56 animate-float">
+      <div className="hidden sm:flex absolute -left-6 top-16 bg-white rounded-2xl shadow-xl shadow-green-100 border border-green-100 px-4 py-3 items-center gap-3 w-56 animate-float">
         <div className="relative flex-shrink-0">
           <img
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=44&h=44&fit=crop&auto=format"
@@ -180,7 +180,7 @@ export function HeroRight() {
       </div>
 
       {/* ── Floating Card: Rating ─────────────────────────────────────────── */}
-      <div className="absolute -right-4 bottom-20 bg-white rounded-2xl shadow-xl shadow-amber-100 border border-amber-100 px-4 py-3 w-44 animate-float-delay">
+      <div className="hidden sm:block absolute -right-4 bottom-20 bg-white rounded-2xl shadow-xl shadow-amber-100 border border-amber-100 px-4 py-3 w-44 animate-float-delay">
         <div className="flex items-center gap-1 mb-1">
           {[1,2,3,4,5].map((i) => (
             <Star key={i} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" aria-hidden />
@@ -191,7 +191,7 @@ export function HeroRight() {
       </div>
 
       {/* ── Floating Badge: Selesai ───────────────────────────────────────── */}
-      <div className="absolute -left-2 bottom-16 bg-green-500 text-white rounded-2xl shadow-lg shadow-green-400/40 px-4 py-2.5 flex items-center gap-2 animate-float-delay2">
+      <div className="hidden sm:flex absolute -left-2 bottom-16 bg-green-500 text-white rounded-2xl shadow-lg shadow-green-400/40 px-4 py-2.5 items-center gap-2 animate-float-delay2">
         <CheckCircle className="w-4 h-4" aria-hidden />
         <div>
           <p className="text-xs font-bold">Pekerjaan Selesai!</p>
@@ -201,7 +201,7 @@ export function HeroRight() {
 
       {/* ── Timer badge ───────────────────────────────────────────────────── */}
       <div className="
-        absolute top-4 right-0
+        hidden sm:flex absolute top-4 right-0
         bg-white rounded-xl shadow-md border border-green-100
         px-3 py-2
         flex items-center gap-2

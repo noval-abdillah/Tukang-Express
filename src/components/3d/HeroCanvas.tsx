@@ -6,7 +6,7 @@
  * Background: transparan di atas gradient CSS putih/hijau-50.
  */
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { FloatingTools } from './FloatingTools';
 import { ParticleField } from './ParticleField';
@@ -46,7 +46,15 @@ interface HeroCanvasProps {
 }
 
 export function HeroCanvas({ scrollProgress }: HeroCanvasProps) {
+  const [particleCount, setParticleCount] = useState(80);
+
+  useEffect(() => {
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    setParticleCount(isMobile ? 24 : 80);
+  }, []);
+
   return (
+    <div className="hidden md:block absolute inset-0">
     <Canvas
       /**
        * Kamera: fov=50, posisi Z=5 (lebih dekat dari sebelumnya agar objek terasa besar)
@@ -97,9 +105,10 @@ export function HeroCanvas({ scrollProgress }: HeroCanvasProps) {
       />
 
       {/* ── 3D Objects ───────────────────────────────────────────────────── */}
-      <ParticleField count={80} spread={7} />
+      <ParticleField count={particleCount} spread={7} />
       <FloatingTools scrollProgress={scrollProgress} />
       <CameraRig scrollProgress={scrollProgress} />
     </Canvas>
+    </div>
   );
 }
